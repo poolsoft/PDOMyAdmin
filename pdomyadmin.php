@@ -4,12 +4,11 @@
 	ini_set('display_errors',1);
 	date_default_timezone_set('Asia/Jakarta');
 
-
 	if(isset($_GET['sign']) && $_GET['sign']=='out') {
 		unset($_SESSION['pdomyadmin']);
 	}
 	
-	if(!empty($_POST['user']) && !empty($_POST['pass'])) {
+	if(!empty($_POST['rdbms']) && !empty($_POST['host']) && !empty($_POST['port']) && !empty($_POST['user']) && !empty($_POST['pass'])) {
 		$_SESSION['pdomyadmin'] = array(
 			'rdbms'	=> $_POST['rdbms'],
 			'host'	=> $_POST['host'],
@@ -98,10 +97,10 @@
 				$query = $this->link->query($sql);
 				$this->affected = $query->rowCount();
 
-				$manipulation = array('insert','update','delete');				
+				$noView = array('insert','update','delete','drop','truncate','alter','create');				
 				$command = trim(strtok(strtolower(preg_replace('/[^a-zA-Z0-9\s]/',' ', $sql)),' '));
 				if($command=='show') $result = $query->fetchAll(PDO::FETCH_COLUMN);
-				elseif(!in_array($command,$manipulation)) $result = $query->fetchAll(PDO::FETCH_ASSOC);
+				elseif(!in_array($command,$noView)) $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
 				$time_end = microtime(true);
 				$this->benchmark = ", ".substr(($time_end-$time_start),0,6)." seconds";
