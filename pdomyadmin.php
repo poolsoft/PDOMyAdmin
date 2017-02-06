@@ -68,8 +68,8 @@
 				$dbName[$_GET['db']] = $this->query('show tables from '.$_GET['db']);
 				$dbKey = array_search($_GET['db'],$dbNames);
 				$dbNames[$dbKey]  = $dbName;
+				$this->link->exec('use '.$_GET['db']);
 				if(!empty($_GET['tb'])) {
-					$this->link->exec('use '.$_GET['db']);
 					$tableName[$_GET['tb']] = $this->query('show columns from '.$_GET['tb']);
 					$dbNames[$dbKey][$_GET['db']][array_search($_GET['tb'],$dbNames[$dbKey][$_GET['db']])] = $tableName;
 				}
@@ -226,7 +226,7 @@
 				foreach($this->result as $rows => $row) {
 					$tmp .= "<tr>";
 					foreach($row as $data) {
-						$tmp .= "<td valign=\"top\">".$data."</td>";
+						$tmp .= "<td valign=\"top\">".htmlspecialchars($data)."</td>";
 					}
 					$tmp .= "</tr>";
 				}
