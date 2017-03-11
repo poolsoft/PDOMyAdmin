@@ -199,7 +199,7 @@
 			$tmp .= "</tr>";
 			$tmp .= "</table>";
 			$tmp .= "<form action=\"?db=".$dbName."&tb=".$tbName."\" method=\"post\">";
-			$tmp .= "<textarea rows=\"10\" name=\"sql\" autocomplete=\"off\" autocorrect=\"off\" spellcheck=\"false\" autocapitalize=\"off\">".$this->sql."</textarea><br /><br />";
+			$tmp .= "<textarea rows=\"10\" id=\"sql\" name=\"sql\" autocomplete=\"off\" autocorrect=\"off\" spellcheck=\"false\" autocapitalize=\"off\">".$this->sql."</textarea><br /><br />";
 			$tmp .= "<table cellpadding=\"0\" cellspacing=\"0\" width=\"700\">";
 			$tmp .= "<tr>";
 			$tmp .= "<td>";
@@ -220,7 +220,7 @@
 				$tmp .= "<table id=\"content\" cellpadding=\"3\">";
 				$tmp .= "<tr bgcolor=\"orange\">";
 				foreach($this->columns as $columnName) {
-					$tmp .= "<td style=\"cursor:pointer\" onclick=\"document.getElementById('sql').value='select \\n* \\nfrom ".$tbName." \\norder by ".$columnName." desc \\nlimit 10';document.getElementsByTagName('form')[0].submit();\">".$columnName."</td>";
+					$tmp .= "<td style=\"cursor:pointer\" title=\"click to sort\" onclick=\"document.getElementById('sql').value='select \\n* \\nfrom ".$tbName." \\norder by ".$columnName." desc \\nlimit 10';document.getElementsByTagName('form')[0].submit();\">".$columnName."</td>";
 				}
 				$tmp .= "</tr>";
 				foreach($this->result as $rows => $row) {
