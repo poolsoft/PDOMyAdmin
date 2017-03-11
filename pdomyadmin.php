@@ -220,7 +220,7 @@
 				$tmp .= "<table id=\"content\" cellpadding=\"3\">";
 				$tmp .= "<tr bgcolor=\"orange\">";
 				foreach($this->columns as $columnName) {
-					$tmp .= "<td>".$columnName."</td>";
+					$tmp .= "<td style=\"cursor:pointer\" onclick=\"document.getElementById('sql').value='select \\n* \\nfrom ".$tbName." \\norder by ".$columnName." desc \\nlimit 10';document.getElementsByTagName('form')[0].submit();\">".$columnName."</td>";
 				}
 				$tmp .= "</tr>";
 				foreach($this->result as $rows => $row) {
